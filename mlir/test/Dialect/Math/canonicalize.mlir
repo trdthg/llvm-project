@@ -649,8 +649,8 @@ func.func @fpowi_fold_failed() -> f32 {
 }
 
 // CHECK-LABEL: @sincos_fold_f32
-// CHECK: %[[sin:.+]] = arith.constant 0.84{{[0-9]+}} : f32
-// CHECK: %[[cos:.+]] = arith.constant 0.54{{[0-9]+}} : f32
+// CHECK: %[[sin:.+]] = arith.constant {{(0.84[0-9]+|8.4[0-9]+e-01)}} : f32
+// CHECK: %[[cos:.+]] = arith.constant {{(0.54[0-9]+|5.4[0-9]+e-01)}} : f32
 // CHECK: return %[[sin]], %[[cos]]
 func.func @sincos_fold_f32() -> (f32, f32) {
   %cst = arith.constant 1.000000e+00 : f32
@@ -669,8 +669,8 @@ func.func @sincos_fold_f64() -> (f64, f64) {
 }
 
 // CHECK-LABEL: @sincos_fold_vec
-// CHECK: %[[sin:.+]] = arith.constant dense<[0.000000e+00, 0.84{{[0-9]+}}, 0.000000e+00, 0.84{{[0-9]+}}]> : vector<4xf32>
-// CHECK: %[[cos:.+]] = arith.constant dense<[1.000000e+00, 0.54{{[0-9]+}}, 1.000000e+00, 0.54{{[0-9]+}}]> : vector<4xf32>
+// CHECK: %[[sin:.+]] = arith.constant dense<[0.000000e+00, {{(0.84[0-9]+|8.4[0-9]+e-01)}}, 0.000000e+00, {{(0.84[0-9]+|8.4[0-9]+e-01)}}]> : vector<4xf32>
+// CHECK: %[[cos:.+]] = arith.constant dense<[1.000000e+00, {{(0.54[0-9]+|5.4[0-9]+e-01)}}, 1.000000e+00, {{(0.54[0-9]+|5.4[0-9]+e-01)}}]> : vector<4xf32>
 // CHECK: return %[[sin]], %[[cos]]
 func.func @sincos_fold_vec() -> (vector<4xf32>, vector<4xf32>) {
   %cst = arith.constant dense<[0.0, 1.0, 0.0, 1.0]> : vector<4xf32>
